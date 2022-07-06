@@ -1,0 +1,9 @@
+.idea
+
+!exports/
+exports/*
+!exports/.gitkeep
+
+!samples/
+samples/*
+!samples/cameraBruit.png
