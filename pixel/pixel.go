@@ -1,13 +1,13 @@
 package pixel
 
 type Pixel struct {
-	R int
-	G int
-	B int
-	A int
+	R float64
+	G float64
+	B float64
+	A float64
 }
 
-func (p *Pixel) Set(keyName string, val int) Pixel {
+func (p *Pixel) Set(keyName string, val float64) Pixel {
 	switch keyName {
 	case "R":
 		p.R = val
@@ -23,9 +23,9 @@ func (p *Pixel) Set(keyName string, val int) Pixel {
 
 func RGBAToPixel(r uint32, g uint32, b uint32, a uint32) Pixel {
 	return Pixel{
-		R: int(r / 257),
-		G: int(g / 257),
-		B: int(b / 257),
-		A: int(a / 257),
+		R: float64(r / 257),
+		G: float64(g / 257),
+		B: float64(b / 257),
+		A: float64(a / 257),
 	}
 }

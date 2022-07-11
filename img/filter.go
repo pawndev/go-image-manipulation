@@ -12,9 +12,9 @@ func (i *Image) MeanFilter() [][]pixel.Pixel {
 	for rowIndex := 0; rowIndex < i.Height; rowIndex++ {
 		p[rowIndex] = make([]pixel.Pixel, len(i.Pixels[rowIndex]))
 		for colIndex := 0; colIndex < i.Width; colIndex++ {
-			var sumR int
-			var sumG int
-			var sumB int
+			var sumR float64
+			var sumG float64
+			var sumB float64
 			var totalDivide int = 0
 
 			for rowindex2 := -1; rowindex2 <= 1; rowindex2++ {
@@ -31,16 +31,16 @@ func (i *Image) MeanFilter() [][]pixel.Pixel {
 					}
 				}
 			}
-			p[rowIndex][colIndex].Set("R", sumR/totalDivide)
-			p[rowIndex][colIndex].Set("G", sumG/totalDivide)
-			p[rowIndex][colIndex].Set("B", sumB/totalDivide)
+			p[rowIndex][colIndex].Set("R", sumR/float64(totalDivide))
+			p[rowIndex][colIndex].Set("G", sumG/float64(totalDivide))
+			p[rowIndex][colIndex].Set("B", sumB/float64(totalDivide))
 			p[rowIndex][colIndex].Set("A", i.Pixels[rowIndex][colIndex].A)
 		}
 	}
 	return p
 }
 
-func (i *Image) Convolute(k kernel.Kernel) [][]pixel.Pixel {
+func (i *Image) Convolve(k kernel.Kernel) [][]pixel.Pixel {
 	p := make([][]pixel.Pixel, len(i.Pixels))
 	for rowIndex := 0; rowIndex < i.Height; rowIndex++ {
 		p[rowIndex] = make([]pixel.Pixel, len(i.Pixels[rowIndex]))
@@ -66,9 +66,9 @@ func (i *Image) Convolute(k kernel.Kernel) [][]pixel.Pixel {
 					}
 				}
 			}
-			p[rowIndex][colIndex].Set("R", int(sumR))
-			p[rowIndex][colIndex].Set("G", int(sumG))
-			p[rowIndex][colIndex].Set("B", int(sumB))
+			p[rowIndex][colIndex].Set("R", sumR)
+			p[rowIndex][colIndex].Set("G", sumG)
+			p[rowIndex][colIndex].Set("B", sumB)
 			p[rowIndex][colIndex].Set("A", i.Pixels[rowIndex][colIndex].A)
 		}
 	}

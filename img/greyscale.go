@@ -16,9 +16,9 @@ func (i *Image) Grayscale(algorithm greyscale.Algorithm) *Image {
 			for colIndex := 0; colIndex < img.Width; colIndex++ {
 				pixel := img.Pixels[rowIndex][colIndex]
 
-				var gray int
+				var gray float64
 				if algorithm == greyscale.Luma {
-					gray = int(float32(pixel.R)*0.2126 + float32(pixel.G)*0.7152 + float32(pixel.B)*0.0722)
+					gray = float64(pixel.R)*0.2126 + float64(pixel.G)*0.7152 + float64(pixel.B)*0.0722
 				} else if algorithm == greyscale.Desaturation {
 					gray = (max(pixel.R, pixel.G, pixel.B) + min(pixel.R, pixel.G, pixel.B)) / 2
 				} else {
@@ -39,7 +39,7 @@ func (i *Image) Grayscale(algorithm greyscale.Algorithm) *Image {
 }
 
 // max finds max among multiple integers
-func max(ints ...int) int {
+func max(ints ...float64) float64 {
 	var max = ints[0]
 	for i := 1; i < len(ints); i++ {
 		if ints[i] > max {
@@ -50,7 +50,7 @@ func max(ints ...int) int {
 }
 
 // min finds min among multiple integers
-func min(ints ...int) int {
+func min(ints ...float64) float64 {
 	var min = ints[0]
 	for i := 1; i < len(ints); i++ {
 		if ints[i] < min {
